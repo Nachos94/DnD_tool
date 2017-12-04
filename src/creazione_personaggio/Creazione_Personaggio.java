@@ -42,6 +42,7 @@ public class Creazione_Personaggio {
     static String Ts;
     static String Lv_tx;
 
+    static String classe;
     static String Guerriero;
     static String Mago;
     static String Ladro;
@@ -84,14 +85,14 @@ public class Creazione_Personaggio {
         
           calcolo punti ferita,CA, Bonus al colpire, bonus ai danni
          */
-        String name = JOptionPane.showInputDialog("---- nome del Personaggio ----");
+        name = JOptionPane.showInputDialog("---- nome del Personaggio ----");
 
         raccoltaCaratteristiche();
 
         String Lv_tx = JOptionPane.showInputDialog("A che lv vuoi creare il personaggio?");
         Lv = Integer.parseInt(Lv_tx);
 
-      String domanda_classe = JOptionPane.showInputDialog("Seleziona la classe: \n"
+        classe = JOptionPane.showInputDialog("Seleziona la classe: \n"
                 + "Guerriero\n"
                 + "Ladro\n"
                 + "Mago\n"
@@ -99,8 +100,8 @@ public class Creazione_Personaggio {
                 + "Chierico\n"
                 + "Monaco\n"
                 + "Paladino\n").toUpperCase();
-        
-        raccoltaClasse(domanda_classe);
+
+        raccoltaClasse();
 
     }
 
@@ -137,58 +138,53 @@ public class Creazione_Personaggio {
 
     }
 
-    static String raccoltaClasse(String domanda_classe) {
-        
-        String classe = "";
+    static void raccoltaClasse() {
+
         boolean ko = false;
-        
-        
-              
-       try {  
-         ko = true;
-         
-        if (domanda_classe.equals("GUERRIERO")) {
 
-            Guerriero();
+        try {
+            ko = false;
+
+            if (classe.equals("GUERRIERO")) {
+
+                Guerriero();
+            }
+
+            if (classe.equals("MAGO")) {
+
+                Mago();
+            }
+            if (classe.equals("LADRO")) {
+
+                Ladro();
+            }
+            if (classe.equals("BARBARO")) {
+
+                Barbaro();
+
+            }
+            if (classe.equals("CHIERICO")) {
+
+                Chierico();
+            }
+            if (classe.equals("MONACO")) {
+
+                Monaco();
+
+            }
+            if (classe.equals("PALADINO")) {
+
+                Paladino();
+            }
+
+        } catch (Exception e) {
+
+            ko = true;
+
+            JOptionPane.showMessageDialog(null, "Inserisci una classe valida");
+
         }
 
-        if (domanda_classe.equals("MAGO")) {
-
-            Mago();
-        }
-        if (domanda_classe.equals("LADRO")) {
-
-            Ladro();
-        }
-        if (domanda_classe.equals("BARBARO")) {
-
-            Barbaro();
-
-        }
-        if (domanda_classe.equals("CHIERICO")) {
-
-            Chierico();
-        }
-        if (domanda_classe.equals("MONACO")) {
-
-            Monaco();
-
-        }
-        if (domanda_classe.equals("PALADINO")) {
-
-            Paladino();
-        }
-        
-       }
-       
-       catch (Exception e) {
-       
-           ko = false;
-       
-           JOptionPane.showMessageDialog(null, "Inserisci una classe valida");
-       
-      }
-        return classe;
     }
 
     static void Guerriero() {
@@ -211,15 +207,6 @@ public class Creazione_Personaggio {
         int txcm = FOR + BAB;
         int txcd = DES + BAB;
 
-        String Guerriero = "-----" + name + "-----";
-        Guerriero = "tiri salvezza: \n" + Ts;
-        Guerriero += "bonus attacco base: " + BAB + "\n";
-        Guerriero += "Bonus al colpire in mischia: " + txcm + "\n";
-        Guerriero += "Bonus al colpire a distanza: " + txcd + "\n";
-        Guerriero += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero);
-
         capacitaClasseW();
 
     }
@@ -241,17 +228,8 @@ public class Creazione_Personaggio {
 
         BAB = Math.round(Lv / 2);
 
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Mago = "-----" + name + "-----";
-        Mago += "tiri salvezza: \n" + Ts;
-        Mago += "bonus attacco base: " + BAB + "\n";
-        Mago += "Bonus al colpire in mischia: " + txcm + "\n";
-        Mago += "Bonus al colpire a distanza: " + txcd + "\n";
-        Mago += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Mago);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseM();
     }
@@ -273,17 +251,8 @@ public class Creazione_Personaggio {
 
         BAB = Math.round(Lv / 4) * 3;
 
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Ladro = "-----" + name + "-----";
-        Ladro += "tiri salvezza: \n" + Ts;
-        Ladro += "bonus attacco base: " + BAB + "\n";
-        Ladro += "Bonus al colpire in mischia: " + txcm + "\n";
-        Ladro += "Bonus al colpire a distanza: " + txcd + "\n";
-        Ladro += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Ladro);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseR();
     }
@@ -304,18 +273,8 @@ public class Creazione_Personaggio {
         JOptionPane.showMessageDialog(null, Ts);
 
         BAB = Math.round(Lv / 4) * 3;
-
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Barbaro = "-----" + name + "-----";
-        Barbaro += "tiri salvezza: \n" + Ts;
-        Barbaro += "bonus attacco base: " + BAB + "\n";
-        Barbaro += "Bonus al colpire in mischia: " + txcm + "\n";
-        Barbaro += "Bonus al colpire a distanza: " + txcd + "\n";
-        Barbaro += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Barbaro);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseB();
     }
@@ -337,18 +296,8 @@ public class Creazione_Personaggio {
         JOptionPane.showMessageDialog(null, Ts);
 
         BAB = Math.round(Lv / 4) * 3;
-
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Chierico = "-----" + name + "-----";
-        Chierico += "tiri salvezza: \n" + Ts;
-        Chierico += "bonus attacco base: " + BAB + "\n";
-        Chierico += "Bonus al colpire in mischia: " + txcm + "\n";
-        Chierico += "Bonus al colpire a distanza: " + txcd + "\n";
-        Chierico += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Chierico);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseC();
 
@@ -372,17 +321,8 @@ public class Creazione_Personaggio {
 
         BAB = Math.round(Lv / 4) * 3;
 
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Druido = "-----" + name + "-----";
-        Druido += "tiri salvezza: \n" + Ts;
-        Druido += "bonus attacco base: " + BAB + "\n";
-        Druido += "Bonus al colpire in mischia: " + txcm + "\n";
-        Druido += "Bonus al colpire a distanza: " + txcd + "\n";
-        Druido += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Druido);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseD();
     }
@@ -405,17 +345,8 @@ public class Creazione_Personaggio {
 
         BAB = Math.round(Lv / 4) * 3;
 
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
-
-        String Monaco = "-----" + name + "-----";
-        Monaco = "tiri salvezza: \n" + Ts;
-        Monaco += "bonus attacco base: " + BAB + "\n";
-        Monaco += "Bonus al colpire in mischia: " + txcm + "\n";
-        Monaco += "Bonus al colpire a distanza: " + txcd + "\n";
-        Monaco += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Monaco);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
         capacitaClasseMon();
     }
@@ -438,18 +369,11 @@ public class Creazione_Personaggio {
 
         BAB = Lv;
 
-        int txcm = tiro_colpireM(FOR, BAB);
-        int txcd = tiro_colpireD(DES, BAB);
+        int txcm = FOR + BAB;
+        int txcd = DES + BAB;
 
-        String Paladino = "-----" + name + "-----";
-        Paladino = "tiri salvezza: \n" + Ts;
-        Paladino += "bonus attacco base: " + BAB + "\n";
-        Paladino += "Bonus al colpire in mischia: " + txcm + "\n";
-        Paladino += "Bonus al colpire a distanza: " + txcd + "\n";
-        Paladino += "Punti Ferita: " + PF + "\n";
-
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Paladino);
         capacitaClasseP();
+
     }
 
     static int tiro_colpireM(int FOR, int BAB) {
@@ -543,7 +467,16 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Guerriero = "-----" + name + "-----\n";
+        Guerriero += "lv " + Lv + "\n";
+        Guerriero += "tiri salvezza: \n" + Ts;
+        Guerriero += "bonus attacco base: " + BAB + "\n";
+        Guerriero += "Bonus al colpire in mischia: " + txcm + "\n";
+        Guerriero += "Bonus al colpire a distanza: " + txcd + "\n";
+        Guerriero += "Punti Ferita: " + PF + "\n";
+        Guerriero += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Guerriero);
 
     }
 
@@ -619,7 +552,16 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Mago + " " + capacita_classe[Lv]);
+        String Mago = "-----" + name + "-----\n";
+        Mago += "lv " + Lv + "\n";
+        Mago += "tiri salvezza: \n" + Ts;
+        Mago += "bonus attacco base: " + BAB + "\n";
+        Mago += "Bonus al colpire in mischia: " + txcm + "\n";
+        Mago += "Bonus al colpire a distanza: " + txcd + "\n";
+        Mago += "Punti Ferita: " + PF + "\n";
+        Mago += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Mago);
 
     }
 
@@ -695,7 +637,16 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Ladro = "-----" + name + "-----\n";
+        Ladro += "lv " + Lv + "\n";
+        Ladro += "tiri salvezza: \n" + Ts;
+        Ladro += "bonus attacco base: " + BAB + "\n";
+        Ladro += "Bonus al colpire in mischia: " + txcm + "\n";
+        Ladro += "Bonus al colpire a distanza: " + txcd + "\n";
+        Ladro += "Punti Ferita: " + PF + "\n";
+        Ladro += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Ladro);
 
     }
 
@@ -771,7 +722,16 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Barbaro = "-----" + name + "-----\n";
+        Barbaro += "lv " + Lv + "\n";
+        Barbaro += "tiri salvezza: \n" + Ts;
+        Barbaro += "bonus attacco base: " + BAB + "\n";
+        Barbaro += "Bonus al colpire in mischia: " + txcm + "\n";
+        Barbaro += "Bonus al colpire a distanza: " + txcd + "\n";
+        Barbaro += "Punti Ferita: " + PF + "\n";
+        Barbaro += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Barbaro);
 
     }
 
@@ -847,7 +807,16 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Chierico = "-----" + name + "-----\n";
+        Chierico += "lv " + Lv + "\n";
+        Chierico += "tiri salvezza: \n" + Ts;
+        Chierico += "bonus attacco base: " + BAB + "\n";
+        Chierico += "Bonus al colpire in mischia: " + txcm + "\n";
+        Chierico += "Bonus al colpire a distanza: " + txcd + "\n";
+        Chierico += "Punti Ferita: " + PF + "\n";
+        Chierico += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Chierico);
 
     }
 
@@ -923,7 +892,15 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Druido = "-----" + name + "-----\n";
+        Druido += "lv " + Lv + "\n";
+        Druido += "tiri salvezza: \n" + Ts;
+        Druido += "bonus attacco base: " + BAB + "\n";
+        Druido += "Bonus al colpire in mischia: " + txcm + "\n";
+        Druido += "Bonus al colpire a distanza: " + txcd + "\n";
+        Druido += "Punti Ferita: " + PF + "\n";
+        Druido += capacita_classe[Lv];
+        JOptionPane.showMessageDialog(null, Druido);
 
     }
 
@@ -999,7 +976,17 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Monaco = "-----" + name + "-----\n";
+        Monaco += "lv " + Lv + "\n";
+        Monaco += caratteristiche + "\n";
+        Monaco += "tiri salvezza: \n" + Ts;
+        Monaco += "bonus attacco base: " + BAB + "\n";
+        Monaco += "Bonus al colpire in mischia: " + txcm + "\n";
+        Monaco += "Bonus al colpire a distanza: " + txcd + "\n";
+        Monaco += "Punti Ferita: " + PF + "\n";
+        Monaco += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Monaco);
 
     }
 
@@ -1010,7 +997,7 @@ public class Creazione_Personaggio {
         capacita2 = "lv2 Grazia divina, Imposizione delle mani \n";
         capacita3 = "lv3 Aura di coraggio\n";
         capacita4 = "lv4 Scacciare non morti\n";
-        capacita5 = "Cavalcatura \n";
+        capacita5 = "lv5 Cavalcatura \n";
         capacita6 = "lv6 talento bonus\n";
         capacita7 = "\n";
         capacita8 = "lv8 talento bonus\n";
@@ -1075,7 +1062,17 @@ public class Creazione_Personaggio {
 
         //devo selezionare il dato corrispondente al lv immesso, il ciclo while deve andare avanti finchè la variabile Lv non è uguale a capacita_classe[Lv]
         //cerco in livello[] la posizione di Lv
-        JOptionPane.showMessageDialog(null, caratteristiche + " " + Guerriero + " " + capacita_classe[Lv]);
+        String Paladino = "-----" + name + "-----\n";
+        Paladino += "lv " + Lv + "\n";
+        Paladino += caratteristiche + "\n";
+        Paladino += "tiri salvezza: \n" + Ts;
+        Paladino += "bonus attacco base: " + BAB + "\n";
+        Paladino += "Bonus al colpire in mischia: " + txcm + "\n";
+        Paladino += "Bonus al colpire a distanza: " + txcd + "\n";
+        Paladino += "Punti Ferita: " + PF + "\n";
+        Paladino += capacita_classe[Lv];
+
+        JOptionPane.showMessageDialog(null, Paladino);
 
     }
 }
