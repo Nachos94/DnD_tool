@@ -989,7 +989,7 @@ public class Creazione_Personaggio {
     static void capacitaClasseP() {
 
         capacita = "";
-        capacita1 = "Aura di bene, Individuazione del male, lv1 punire il male 1\\g \n";
+        capacita1 = "lv1 Aura di bene, Individuazione del male,  punire il male 1\\g \n";
         capacita2 = "lv2 Grazia divina, Imposizione delle mani \n";
         capacita3 = "lv3 Aura di coraggio\n";
         capacita4 = "lv4 Scacciare non morti\n";
